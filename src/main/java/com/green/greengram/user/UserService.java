@@ -19,7 +19,7 @@ public class UserService {
         return mapper.insUser(dto);
     }
     //1: 아이디/비번 맞췄음,2: 아이디 없음 3:비밀번호 다름
-    /*public ResVo postUserSign(UserInsSignin sdto){
+    public ResVo postUserSign(UserInsSignin sdto){
         int result = 3;
         String savedUpw = mapper.selUserById(sdto.getUid());
         System.out.println("savedUpw : " + savedUpw);
@@ -30,14 +30,14 @@ public class UserService {
         }
 
         return new ResVo(result);
-    }*/
+    }
 
     public List<UserInsSignin> getByIdpw(){
         idlist =mapper.selUserByIdList();
         return mapper.selUserByIdList();
     }
 
-    public int postUserSign(UserInsSignin sdto){
+   /* public int postUserSign(UserInsSignin sdto){
         idlist = mapper.selUserByIdList();
         getByIdpw();
 
@@ -53,7 +53,7 @@ public class UserService {
         }
         System.out.println("result :" + result );
         return result;
-    }
+    }*/
 
 
 }

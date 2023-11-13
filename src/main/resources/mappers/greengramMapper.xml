@@ -11,6 +11,19 @@
         pic = #{pic}
     </insert>
 
+    <!--<insert id="insUser">
+        INSERT INTO t_user
+        set uid = #{uid},
+        upw = #{upw},
+        nm = #{nm},
+        pic = #{pic}
+        <if test = "pic != null and pic != '' ">
+            , pic = #{pic}
+        </if>
+    </insert>
+    중복된 코드를 한번 더 작성해야 할 때 사용하면 좋다
+    if태그-->
+
     <select id="selUserByIdList">
         SELECT uid, upw
         FROM t_user

@@ -22,7 +22,7 @@ public class UserController {
 
     //1: 아이디/비번 맞췄음,2: 아이디 없음 3:비밀번호 다름
     @PostMapping("/signin")
-    public int login(@RequestBody UserInsSignin sdto){
+    public ResVo login(@RequestBody UserInsSignin sdto){
         return service.postUserSign(sdto);
     }
 
