@@ -29,4 +29,14 @@ public class FeedService {
         FeedSelDto dto = new FeedSelDto(page);
         return mapper.selFeed(dto);
     }
+    /*public List<FeedSelVo> getFeed(int page){
+        final int ROW_COUNT = 20;
+        FeedSelDto dto = FeedSelDto.builder()
+                .startIdx((page - 1) * ROW_COUNT)
+                .rowCount(ROW_COUNT)
+                .build();
+        List<FeedSelVo> result = mapper.selFeed(dto);
+        return result;
+    }
+}*/
 }
