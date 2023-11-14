@@ -7,9 +7,9 @@ import lombok.Getter;
 @Builder
 public class FeedSelDto {
     private int startIdx;
-    private final int rowCount = 20;
+    private final int rowCount;
 
-    public FeedSelDto(int page){
-        startIdx = ( page-1 )*rowCount;
-    }
+    //public FeedSelDto(int page){
+        //startIdx = ( page-1 )*rowCount;
+   // }
 }

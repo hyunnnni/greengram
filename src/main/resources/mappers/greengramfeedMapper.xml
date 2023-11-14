@@ -3,7 +3,8 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.greengram.feed.FeedMapper">
     <insert id="insFeed" useGeneratedKeys="true" keyProperty="ifeed"> <!-- 마리아 musql에만 적용
-    useGeneratedKeys는 AUTO_INCREMENT 로 정했던 키값을 가져오겠다 그 값을 keyProperty로 하겠다 -->
+    useGeneratedKeys는 AUTO_INCREMENT 로 정했던 키값을 가져와서 그 값을 keyProperty = 멤버필드인 ifeed로 넣겠다
+    아래 사진 파일을 insert하려면 우선 이 insert문이 실행이되어야 해당 ifeed값안에 (외래키) 사진 파일이름을 넣을 수 있다-->
         INSERT INTO t_feed
         SET iuser = #{iuser}
         , contents = #{contents}
@@ -37,5 +38,12 @@
         LIMIT #{startIdx}, #{rowCount}
     </select>
 
-
+    <select id="selFeedPics">
+        SELECT ifeed, pic
+        FROM t_feed_pic
+        WHERE ifeed IN
+        <foreach collection="list" item="ifeed" open="(" close=")" separator=",">
+            #{ifeed}
+        </foreach>
+    </select>
 </mapper>
