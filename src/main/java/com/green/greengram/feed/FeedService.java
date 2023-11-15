@@ -30,12 +30,37 @@ public class FeedService {
         int result2 = mapper.insFeedPic(p2Dto);
         return new ResVo(pDto.getIfeed());
     }
+    public List<FeedSelVo> getFeed(int page, int iuser){
+        final int ROW_COUNT = 20;
+        FeedSelDto dto = FeedSelDto.builder()
+                .iuser(iuser)
+                .startIdx((page - 1) * ROW_COUNT)
+                .rowCount(ROW_COUNT)
+                .build();
+        List<FeedSelVo> feedSelVoList = mapper.selFeed(dto);
+        List<Integer> iFeedList = new ArrayList<>();
+        Map<Integer, FeedSelVo> feedMap = new HashMap<>();
+
+        for(FeedSelVo vo : feedSelVoList){
+            System.out.println(vo);
+            iFeedList.add(vo.getIfeed());
+            feedMap.put(vo.getIfeed(), vo);
+        }
+        List<FeedPicsVo> feedPicsVoList = mapper.selFeedPics(iFeedList);
+        System.out.println("-----------------------------------");
+        for(FeedPicsVo vo : feedPicsVoList) {
+            System.out.println(vo);
+            FeedSelVo feedVo = feedMap.get(vo.getIfeed());
+            feedVo.getPics().add(vo.getPic());
+        }
+        return feedSelVoList;
+    }
 
     /*public List<FeedSelVo> getFeed(int page) {
         FeedSelDto dto = new FeedSelDto(page);
         return mapper.selFeed(dto);
     }*/
-     List<FeedSelVo> getFeed(int page){//build 애노테이션을 이용한 생성자
+    /* public List<FeedSelVo> getFeed(int page){//build 애노테이션을 이용한 생성자
     //각 멤버필드에 생성자처럼 값을 넣어줄 수 있고 그 주소값을 가질 수 있는데
     //멤버필드에 원하는 값을 넣기 편하고 어디에 어떤 값이 들어가는지 알기 쉽다
     //lombok을 사용하면 build패턴 만들기가 쉽다
@@ -71,6 +96,8 @@ public class FeedService {
 
         return feedSelVoList;
     }
+*/
+    /*현민씨가 한 거 원래 FeedSelVo에 리스트 객체 생성 안해도 된다
     public List<FeedSelVo> getFeed(Integer page) {
         final int count = 30;
         List<FeedSelVo> feedSelVoList = mapper.selFeed(
@@ -99,6 +126,22 @@ public class FeedService {
         }
 
         return feedSelVoList;
+    }*/
+
+    //좋아요 :1 , 취소 : 2
+    //값이 있는지 없는지 확인
+    //delete를 먼저 보내고 실행 결과 값에 따라 유무를 체크한다
+    //그러면 select을 쓸 필요가 없다
+    //그 결과에 따라 insert또는 delete
+    //
+    public ResVo procFav(FeedFavProcDto dto){
+        int result = mapper.delFeedFav(dto);
+
+        if(result == 0 ){
+            return new ResVo(mapper.insFeedFav(dto));
+
+        }
+        return new ResVo(2);
     }
 }
 

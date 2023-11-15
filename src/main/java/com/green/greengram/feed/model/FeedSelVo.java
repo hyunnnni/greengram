@@ -12,6 +12,7 @@ public class FeedSelVo {
     private String location;
     private int iuser;
     private String writer;
-    private String createAt;
+    private String createdAt;
+    private int isFav;
     private List<String> pics= new ArrayList<>();
 }

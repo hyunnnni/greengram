@@ -3,6 +3,8 @@ package com.green.greengram.user;
 import com.green.greengram.ResVo;
 import com.green.greengram.user.model.UserInsDto;
 import com.green.greengram.user.model.UserInsSignin;
+import com.green.greengram.user.model.UserLoginVo;
+import com.green.greengram.user.model.UserSigninProcVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +20,30 @@ public class UserService {
     public int postUserIns(UserInsDto dto){
         return mapper.insUser(dto);
     }
+
+
     //1: 아이디/비번 맞췄음,2: 아이디 없음 3:비밀번호 다름
-    public ResVo postUserSign(UserInsSignin sdto){
-        int result = 3;
-        String savedUpw = mapper.selUserById(sdto.getUid());
+    public UserLoginVo postUserSign(UserInsSignin sdto){
+        UserLoginVo ulv = new UserLoginVo();
+
+
+        ulv.setResult(3);
+
+        UserSigninProcVo savedUpw = mapper.selUserById(sdto.getUid());
+
         System.out.println("savedUpw : " + savedUpw);
-        if(savedUpw == null){
-            result = 2;
-        } else if(savedUpw.equals(sdto.getUpw())){
-            result =1;
+        if(savedUpw.getUpw() == null){
+            ulv.setResult(2);
+        } else if(savedUpw.getUpw().equals(sdto.getUpw())){
+            ulv.setNm(savedUpw.getNm());
+            ulv.setIuser(savedUpw.getIuser());
+            ulv.setPic(savedUpw.getPic());
+            ulv.setResult(1);
+
         }
 
-        return new ResVo(result);
+
+        return ulv;
     }
 
     public List<UserInsSignin> getByIdpw(){

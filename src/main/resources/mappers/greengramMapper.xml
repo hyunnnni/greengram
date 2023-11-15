@@ -30,7 +30,7 @@
     </select>
 
     <select id="selUserById">
-        SELECT upw FROM t_user
+        SELECT iuser, upw, nm, pic FROM t_user
         WHERE uid = #{uid}
     </select>
 </mapper>
