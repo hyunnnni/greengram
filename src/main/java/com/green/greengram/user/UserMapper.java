@@ -1,9 +1,6 @@
 package com.green.greengram.user;
 
-import com.green.greengram.user.model.UserInsDto;
-import com.green.greengram.user.model.UserInsSignin;
-import com.green.greengram.user.model.UserLoginVo;
-import com.green.greengram.user.model.UserSigninProcVo;
+import com.green.greengram.user.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -18,5 +15,5 @@ public interface UserMapper {
 
     List<UserInsSignin> selUserByIdList();
 
-
+    UserSelProVo selUserProfileInfo(int iuser);
 }

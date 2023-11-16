@@ -1,10 +1,7 @@
 package com.green.greengram.user;
 
 import com.green.greengram.ResVo;
-import com.green.greengram.user.model.UserInsDto;
-import com.green.greengram.user.model.UserInsSignin;
-import com.green.greengram.user.model.UserLoginVo;
-import com.green.greengram.user.model.UserSigninProcVo;
+import com.green.greengram.user.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -69,5 +66,8 @@ public class UserService {
         return result;
     }*/
 
+    public UserSelProVo UserprofileInfo (int iuser){
 
+        return mapper.selUserProfileInfo(iuser);
+    }
 }

@@ -37,9 +37,16 @@
         on U.iuser = F.iuser
         LEFT JOIN t_favorite AS C
         on F.ifeed = C.ifeed
-        AND C.iuser = #{iuser}
+        AND C.iuser = #{loginedIuser}
+        <if test="targetIuser > 0">
+            WHERE U.iuser = #{targetIuser}
+        </if>
         ORDER BY ifeed DESC
         LIMIT #{startIdx}, #{rowCount}
+        <!-- 로그인한 iuser와 보고자하는 프로필 주인 iuser의 값을 둘 다 구할 수 있다
+         그래서 복사해 두개로 나눠도 되고 같이 사용해도 된다
+         보고자하는 프로필 주인이 없다면 0 >> 원래 로그인한 iuser로만 쿼리문이 실행
+         주인이 있다면 1 >> 프로필 주인의 값으로 쿼리문 실행 -->
     </select>
 
     <select id="selFeedPics">

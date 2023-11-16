@@ -4,6 +4,7 @@ import com.green.greengram.ResVo;
 import com.green.greengram.user.model.UserInsDto;
 import com.green.greengram.user.model.UserInsSignin;
 import com.green.greengram.user.model.UserLoginVo;
+import com.green.greengram.user.model.UserSelProVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,5 +31,11 @@ public class UserController {
     @GetMapping
     public List<UserInsSignin> getByIdpw(){
         return service.getByIdpw();
+    }
+
+    //
+    @GetMapping("/{targetIuser}")
+    public UserSelProVo getUserprofileInfo(@PathVariable int targetIuser){
+        return service.UserprofileInfo(targetIuser);
     }
 }

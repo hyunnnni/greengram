@@ -20,4 +20,6 @@ public interface FeedMapper {
     int delFeedFav(FeedFavProcDto dto);
 
     int insFeedFav(FeedFavProcDto dto);
+
+
 }

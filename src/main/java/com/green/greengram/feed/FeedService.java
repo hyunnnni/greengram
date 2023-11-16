@@ -30,10 +30,11 @@ public class FeedService {
         int result2 = mapper.insFeedPic(p2Dto);
         return new ResVo(pDto.getIfeed());
     }
-    public List<FeedSelVo> getFeed(int page, int iuser){
+    public List<FeedSelVo> getFeed(int page, int loginedIuser ,int targetIuser){
         final int ROW_COUNT = 20;
         FeedSelDto dto = FeedSelDto.builder()
-                .iuser(iuser)
+                .loginedIuser(loginedIuser)
+                .targetIuser(targetIuser)
                 .startIdx((page - 1) * ROW_COUNT)
                 .rowCount(ROW_COUNT)
                 .build();
@@ -52,6 +53,9 @@ public class FeedService {
             System.out.println(vo);
             FeedSelVo feedVo = feedMap.get(vo.getIfeed());
             feedVo.getPics().add(vo.getPic());
+            //풀어쓴 것
+            //List<String> strPicsList = feedVo.getPics();
+            //strPicsList.add(vo.getPic());
         }
         return feedSelVoList;
     }

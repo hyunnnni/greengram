@@ -19,13 +19,20 @@ public class FeedController {
     @PostMapping
     public ResVo postFeedIns(@RequestBody FeedInsDto dto){
         System.out.println(dto);
-        service.postFeedIns(dto);
-        return null;
+        return service.postFeedIns(dto);
+
     }
 
     @GetMapping
     public List<FeedSelVo> getFeed(int page, int iuser){
-        return service.getFeed(page, iuser);
+        return service.getFeed(page, iuser
+                ,0);
+    }
+
+    @GetMapping("/{targetIuser}")
+    public List<FeedSelVo> getFeed(@PathVariable int targetIuser, int page, int loginedIuser){
+        return service.getFeed(page, loginedIuser
+                , targetIuser);
     }
 
 
