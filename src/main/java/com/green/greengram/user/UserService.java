@@ -29,7 +29,7 @@ public class UserService {
         UserSigninProcVo savedUpw = mapper.selUserById(sdto.getUid());
 
         System.out.println("savedUpw : " + savedUpw);
-        if(savedUpw.getUpw() == null){
+        if(savedUpw == null){
             ulv.setResult(2);
         } else if(savedUpw.getUpw().equals(sdto.getUpw())){
             ulv.setNm(savedUpw.getNm());
